@@ -11,6 +11,7 @@ Important: as of now works on Chrome, Windows (can be modified for other OS and 
 HKEY_LOCAL_MACHINE\SOFTWARE\Google\Chrome\NativeMessagingHosts\python.javascript.collab
 with a value:
 C:\PythonJScollab\nodejs\chrome\python.javascript.collab.json
+(https://developer.chrome.com/extensions/nativeMessaging#examples for more info)
 6. Enable developer mode in Chrome on this page (chrome://extensions)
 7. Click "Load unpacked".
 8. Navigate there to the folder C:\PythonJScollab\chrome then click `open` from inside the folder.
