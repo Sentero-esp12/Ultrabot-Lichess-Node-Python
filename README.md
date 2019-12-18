@@ -13,5 +13,5 @@ with a value:
 C:\PythonJScollab\nodejs\chrome\python.javascript.collab.json
 6. Enable developer mode in Chrome on this page (chrome://extensions)
 7. Click "Load unpacked".
-8. Open to the folder C:\PythonJScollab\chrome then click `open` from inside the folder.
+8. Navigate there to the folder C:\PythonJScollab\chrome then click `open` from inside the folder.
 9. Create a game on Lichess to test. See output in the console (F12), or the background page console (go to chrome://extensions and click `background` for this extension)
