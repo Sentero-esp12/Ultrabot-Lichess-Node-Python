@@ -1,5 +1,5 @@
 ## compute_input.py
-
+"""
 import sys, json
 
 #Read data from stdin
@@ -13,9 +13,14 @@ def read_in():
 #for i in data:
         #print i
         #return data
-        data=sys.stdin.buffer.read(5000)
-        sys.stdin.flush()
-        print (data)
+        data=sys.stdin.buffer.read(1)
+        #sys.stdin.flush()
+        if data == 64: print ('234'); sys.stdin.flush(); read_in()
+        read_in()
+
+
+
+
         #print ('test')
         #while True:
             #val = self.file.buffer.read(1)
@@ -24,7 +29,7 @@ def read_in():
                 #break
             #self.value += val
         #return self.value
-        return '123'
+        #return '123'
 
 
 def main():
@@ -40,9 +45,23 @@ def main():
     #return the sum to the output stream
     #print lines_sum
     #for line in lines:
-    print (lines)
-    print ('test')
+    #print (lines)
+    #print ('test')
     sys.stdout.flush()
 #start process
 if __name__ == '__main__':
     main()
+"""
+
+#!/usr/bin/python
+import sys
+
+def process(line):
+    #return len(line)
+    return line
+try:
+    while True:
+        line = input()
+        print(process(line))
+except EOFError:
+    pass

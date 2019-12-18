@@ -21,6 +21,12 @@ var spawn = require('child_process').spawn,
 py.stdout.on('data', function(data){
   dataString += data.toString();
   sendMessage({message: 'python', body: 'received data from python'});
+  let toSend;
+  for (let i=0;i<data.length;i++) {
+    toSend+=String.fromCharCode(data[i]);
+  }
+
+  sendMessage({message: 'python', body: {fromPy: toSend}});
 });
 py.stdout.on('end', function(){
   //console.log('Sum of numbers=',dataString);
@@ -56,7 +62,7 @@ searching(req.body);
   else if (req.message === 'move')
   {
     sendMessage({message: 'python', body: 'sending data to python'});
-    py.stdin.write(JSON.stringify(req.body)+'\n');
+    py.stdin.write(JSON.stringify(req.body)+'\r\n');
     //py.stdin.end();
   }
   else
