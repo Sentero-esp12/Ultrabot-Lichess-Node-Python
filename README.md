@@ -1,7 +1,7 @@
 # Ultrabot-Lichess-Node-Python
 We want to create an ultrabullet bot which plays like a human. We are welcoming any contributors with a variety of programming languages
 # Installation
-Important: tested on Chrome and Windows. 
+Important: as of now works on Chrome, Windows (can be modified for other OS and browsers). 
 
 1. Install Node (add to path)
 2. Install Python (add to path)
