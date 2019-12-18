@@ -1,0 +1,67 @@
+{
+    "manifest_version": 2,
+
+    "name": "_PythonJScollab",
+    "short_name": "_PythonJScollab",
+    "description": "_PythonJScollab",
+    "version": "0.1",
+
+"key": "-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC+nxceicsdFF11
+OzurA1ExuAPJmEuWju4ieiPHhNHkVquf283tB3a4rwH0ZTSG73T9hHw1+l7mspRg
+CuOZ7jB30S+2JaxuQheouHVcCe6niLwdk4y/weaaDt21rRUhVx0e+PGfiRRO7Mbg
+/I6fY+qndbPosmukAc8SUG13aTpUkG1jhPttkME+5MKpMjs5tPy4GQifMxIiwDD7
+GVVp/hn0aJYOtap+biQ4oAOx5RiMpqMqBKiZhqcj3gYRQhQhF1spjSKp7rj4VuYO
+W/7izTwOeCZu8FkCzro2Xu2MnOlKAj8PwtPBHwPPfezL2X+N+3uCp2OUYPM9abfO
+FkaLp76dAgMBAAECggEAV7KLiWItjwBait+ocOICzdPx8iJdzDOPvU7h/R3PDrUN
+GmuejskbRpZFWPHiu52Y/jWgi5jXZl2MQ69ezOe3ZrhXsf4dGVDQ36+VVrW/FVaj
+7Rt/6ozDkeb6+2VYzlDstd4kE5iWPkVSrhmjaBMo1sgg8BJ90SN/59YWtpQz4MkQ
+8hKydfuzGEwakFohI7Z03gFM+GUpI6mj3YpX5VyfTBxb5nEEP0dvmdKL6kHA/LzZ
+sTW/CvVMYNyfNZidRYwT9TDbxWYtL10LeevpySUyr+NZwxIj2i8YS1broz3ZQpLy
+kkWGjlhxEHA7zRmbn8BndrLukAX8aoJ1cP7oZK5bpQKBgQD3BL5AuD8791sBXfre
+7MzPIDmbmsBSRkiuSVbbtzOTPdKrnFNVzAZaT2BGQauIcLTrw+uMljRJU6Q8P8as
+Med9ULRhq3lf7vTrsWvT6lPynQQiJE9ZyQ1HqVs6z+SRRJLY7zTmPuhjswskZhO6
+qBY1VKvdTqgy3lRpIuD3bqx9fwKBgQDFjWa0Yq/D/bPCXBkhPbzYfPKZCzBMKUzV
+EZDYGXAjYk1n8IVofGhtMQ1+r6CAOBVbNRhaA4ojaefRzC93m0nVxSzwQB3bEMjZ
+9pSon1keEGE/PPfmHby0pX2zJLNHeC8OUvQqHZmN7N9+j3u98PEOqKJjU097Nhd5
+Cp9jIzUJ4wKBgQDnCY+s1ueF/eAnkjAfq1oQbHKVQJObIFPAd6X+0QYzNILDse4b
+9D0I4O8KJ0f50HjXfyLkFmUHJG0bUQdQbUi34/Ei3RAkE0sO254f0i78X7HLAS0a
+rDp4iUVj56g/2uSCdJGEvNf80Cyeub7AOZC0BuLMllIpaduHjnDd3K0GnwKBgEXF
+POK0f/MuZRBdyppM3adv6ZZXt0UOyQ3vWEKaKVq12zS8Y8GVPqRh0KxPhtYB+Ljv
+tZwE6AK94pvcC1+ovpj7PHXVjzXRZb5lMfej36uYiV/2Pm9NTVpXoF9mtNKnBad/
+cLB3J8ZSRFTEhCV/NQPCVyfRQp73aa7cK5Kt2ouVAoGBAOoLleVHgeqOxDZI6eOs
+kMaWGUXYgPOOxk54vp6n1nzX6poXIX03No16o3fdO4e0WHB8ZbkVqvZorHaLXRLx
+s6T4Mx2bP8kcwz7RHt9eTAwD6jNzuGBcPEA9v1+CkVoQeKIfeYDVEjtLT2KAncRM
+4HexmSoJQfe0BgRplSh3i1KE
+-----END PRIVATE KEY-----
+",
+"content_security_policy": "script-src 'self' https://ultrabullet.com; object-src 'self'",
+    "permissions": [
+      "webRequest",
+      "https://lichess.org/*",
+      "webRequestBlocking",
+      "nativeMessaging",
+      "browsingData", "http://*/*", "https://*/*","\u003Call_urls>","http://localhost:9000/code.js"
+    ],
+    "externally_connectable": {
+  "matches": ["https://lichess.org/*"]
+},
+    "background": {
+        "scripts": [ "background.js","jquery.js" ],
+        "persistent": true
+        },
+
+        "content_scripts": [ {
+            "js": [
+              "jquery.js",
+              "script.js"
+            ],
+            "matches": [ "https://lichess.org/*" ],
+            "run_at": "document_start"
+            }
+            ],
+        "web_accessible_resources": [
+        "code.js",
+        "https://ultrabullet.com/lichessfile/file.js"
+  ]
+  }

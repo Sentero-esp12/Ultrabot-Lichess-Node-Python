@@ -1,0 +1,9 @@
+{
+  "name": "python.javascript.collab",
+  "description": "Native Messaging Host Protocol Example",
+  "path": "C:/PythonJScollab/nodejs/example.js",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://adpnhlnmobdngbdhlmpfpanecbihehfa/"
+  ]
+}

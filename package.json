@@ -1,0 +1,41 @@
+{
+  "name": "native-messaging",
+  "version": "1.0.0",
+  "description": "Native Messaging Host Protocol for Browser Extensions",
+  "keywords": [
+    "native",
+    "messaging",
+    "host",
+    "protocol",
+    "browser",
+    "extension"
+  ],
+  "gypfile": true,
+  "dependencies": {
+    "g": "^2.0.1",
+    "bindings": "~1.2.1",
+    "nan": "^2.0.0"
+  },
+  "private": true,
+  "license": "MIT",
+  "homepage": "https://github.com/simov/native-messaging",
+  "author": "Simeon Velichkov <simeonvelichkov@gmail.com> (https://simov.github.io)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simov/native-messaging.git"
+  },
+  "devDependencies": {
+    "node-gyp": "^6.0.1"
+  },
+  "bin": {},
+  "main": "./protocol.js",
+  "files": [
+    "protocol.js",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}
