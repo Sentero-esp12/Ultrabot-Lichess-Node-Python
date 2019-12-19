@@ -1,3 +1,5 @@
+let boardCoordinates=null;
+
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(sender.tab ?
@@ -7,8 +9,15 @@ chrome.runtime.onMessage.addListener(
   {
      console.log('the page is reloading');
 }
-else if (request.ready == "true") {
+else if (request.ready === "true") {
   console.log('ready');
+}
+else if (request.numberFound) {
+  let checkN=request.numberFound;
+  (((checkN==='true') && (checkVersion=false))||(checkVersion=true));
+}
+else if (request.board) {
+  boardCoordinates=request.board.slice(0);
 }
 /*else if (request.move) {
   let receivedMove=request.move;
@@ -19,7 +28,7 @@ else if (request.ready == "true") {
 
   });
 
-
+let checkVersion=true;
 
   chrome.runtime.onMessageExternal.addListener(
     function(request, sender, sendResponse) {
@@ -31,14 +40,42 @@ else if (request.ready == "true") {
       //else
        if (request.move) {
          let receivedMove=request.move;
-         console.log(receivedMove);
-         port.postMessage({message: 'move', body: receivedMove});
+         receivedMove.push(boardCoordinates);
+         organizeData(receivedMove);
+         //console.log(receivedMove);
+         //port.postMessage({message: 'move', body: receivedMove});
       } else if (request.success)
       {
         console.log("success");
       }
     });
 
+
+const findPossibles = (moves) => {
+if (!moves) {return null} else {
+for (const move in moves) {
+moves[move]=moves[move].match(/.{1,2}/g);
+}
+return moves;
+}
+}
+
+const organizeData = (move) => {
+let toPython={};
+toPython.fen=move[1].fen;
+toPython.lastMove=move[1].uci;
+toPython.currentPlayer=move[0].game.player;
+toPython.color=move[0].player.color;let oppColor=move[0].opponent.color;
+toPython.timePlayer=move[1].clock[toPython.color];
+toPython.timeOpp==move[1].clock[oppColor];
+toPython.possibleMoves=findPossibles(move[0].possibleMoves);
+toPython.possiblePremoves=null;
+toPython.isUnderCheck=null;
+toPython.boardCoord=move[2];
+toPython.threefold=move[0].game.threefold;
+console.log(toPython);
+port.postMessage({message: 'move', body: toPython});
+}
 
 
 

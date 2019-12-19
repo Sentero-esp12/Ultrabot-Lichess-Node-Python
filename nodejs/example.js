@@ -25,7 +25,8 @@ py.stdout.on('data', function(data){
   for (let i=0;i<data.length;i++) {
     toSend+=String.fromCharCode(data[i]);
   }
-
+  let ind=toSend.indexOf('{');
+if (ind!==-1) {toSend=toSend.slice(ind)}
   sendMessage({message: 'python', body: {fromPy: toSend}});
 });
 py.stdout.on('end', function(){
