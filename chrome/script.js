@@ -57,10 +57,13 @@ chrome.runtime.onMessage.addListener(
     console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");
-    if (request.reload === "true")
+    if (request.reload === "true") {
       document.write("Processing..");
       sendResponse({reloading: "true"});
       location.reload();
+    } else if (request.need === "board") {
+      sendResponse({board: coord});
+    }
   });
 
 

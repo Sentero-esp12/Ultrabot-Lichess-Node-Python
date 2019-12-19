@@ -40,8 +40,22 @@ let checkVersion=true;
       //else
        if (request.move) {
          let receivedMove=request.move;
+         if (boardCoordinates) {
          receivedMove.push(boardCoordinates);
          organizeData(receivedMove);
+       } else {
+
+         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+       chrome.tabs.sendMessage(tabs[0].id, {need: "board"}, function(response) {
+         if (response.board)
+         {
+           boardCoordinates=response.board
+         }
+       });
+     });
+
+
+       }
          //console.log(receivedMove);
          //port.postMessage({message: 'move', body: receivedMove});
       } else if (request.success)
