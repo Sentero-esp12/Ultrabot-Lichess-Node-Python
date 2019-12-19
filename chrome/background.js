@@ -81,7 +81,7 @@ toPython.lastMove=move[1].uci;
 toPython.currentPlayer=move[0].game.player;
 toPython.color=move[0].player.color;let oppColor=move[0].opponent.color;
 toPython.timePlayer=move[1].clock[toPython.color];
-toPython.timeOpp==move[1].clock[oppColor];
+toPython.timeOpp=move[1].clock[oppColor];
 toPython.possibleMoves=findPossibles(move[0].possibleMoves);
 toPython.possiblePremoves=null;
 toPython.isUnderCheck=null;
