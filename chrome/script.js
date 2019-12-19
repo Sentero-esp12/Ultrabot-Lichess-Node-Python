@@ -4,7 +4,7 @@ let checkIfGame = /(?=.*?[A-Z].*[A-Z])https:\/\/lichess.org\/\w{8,}/
 let link = window.location.href;
 let isGame = checkIfGame.test(link);
 let board,rectBoard,bX,coord;
-
+let dataField,dataToField;
 
 
 const checkForCoord = (e) =>
@@ -24,7 +24,21 @@ const checkForCoord = (e) =>
 }
 const resezing = (e) =>
 {   window.addEventListener('mousemove',checkForCoord)    }
-
+const addFields = () =>
+{
+//let mainWrap=$('#main-wrap')[0];
+let mainWrap=$('.game__meta')[0];
+let data=document.createElement('div');
+let dataTo=document.createElement('div');
+mainWrap.appendChild(data);mainWrap.appendChild(dataTo);
+dataField=data;dataToField=dataTo;
+dataField.innerText='DataFrom';
+dataField.style.width=350+'px';
+dataField.style.wordWrap= 'break-word';
+dataToField.innerText='DataTo';
+dataToField.style.width=350+'px';
+dataToField.style.wordWrap= 'break-word';
+}
 
 
 $( document ).ready(function() {
@@ -41,7 +55,7 @@ $( document ).ready(function() {
     chrome.runtime.sendMessage({ready: "true"});
     window.addEventListener('resize', resezing)
     window.addEventListener('mousemove',checkForCoord)
-
+    addFields();
 
 
   }
@@ -53,16 +67,23 @@ $( document ).ready(function() {
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log('got');
-    console.log(sender.tab ?
+    //console.log('got');
+    /*console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
-                "from the extension");
+                "from the extension");*/
     if (request.reload === "true") {
       document.write("Processing..");
       sendResponse({reloading: "true"});
       location.reload();
     } else if (request.need === "board") {
       sendResponse({board: coord});
+    }
+    else if (request.info) {
+let where=request.info;
+let text=where[1];
+text=text.replace(/\\/g, '');
+where[0]==='toPython'?dataToField.innerText='toPython ---> '+text:dataField.innerText=text;
+console.log(where[0])
     }
   });
 

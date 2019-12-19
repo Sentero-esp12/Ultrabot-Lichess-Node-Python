@@ -76,6 +76,13 @@ return moves;
 }
 }
 
+const messageToContent = (info,data) => {
+  if (typeof data !== 'string') data=JSON.stringify(data);
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+  chrome.tabs.sendMessage(tabs[0].id, {info: [info,data]});
+  });
+}
+
 const organizeData = (move) => {
 let toPython={};
 toPython.fen=move[1].fen;
@@ -91,7 +98,11 @@ toPython.boardCoord=move[2];
 toPython.threefold=move[0].game.threefold;
 toPython.piecesPosition=Chessboard.fenToObj(toPython.fen);
 console.log(toPython);
-if (!pliesV) port.postMessage({message: 'move', body: toPython});
+if (!pliesV) {port.postMessage({message: 'move', body: toPython});
+messageToContent('toPython',toPython);
+
+
+}
 }
 
 
@@ -154,7 +165,8 @@ function handleMessage (req) {
   else
   if (req.message === 'python')
   {
-    console.log(req.body)
+    console.log(req.body);
+    messageToContent('fromPython',req.body);
   }
   else
   if (req.message === 'isActive')
