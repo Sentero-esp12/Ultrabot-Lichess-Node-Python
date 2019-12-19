@@ -47,7 +47,7 @@ s6T4Mx2bP8kcwz7RHt9eTAwD6jNzuGBcPEA9v1+CkVoQeKIfeYDVEjtLT2KAncRM
   "matches": ["https://lichess.org/*"]
 },
     "background": {
-        "scripts": [ "background.js","jquery.js" ],
+        "scripts": [ "background.js","jquery.js","chessboard/chessboard-1.0.0.min.js" ],
         "persistent": true
         },
 

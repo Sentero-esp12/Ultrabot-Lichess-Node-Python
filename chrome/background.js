@@ -50,6 +50,8 @@ let checkVersion=true;
          if (response.board)
          {
            boardCoordinates=response.board
+           receivedMove.push(boardCoordinates);
+           organizeData(receivedMove);
          }
        });
      });
@@ -64,7 +66,7 @@ let checkVersion=true;
       }
     });
 
-
+const pliescheck='\x72\x61\x74\x65\x64';
 const findPossibles = (moves) => {
 if (!moves) {return null} else {
 for (const move in moves) {
@@ -79,7 +81,7 @@ let toPython={};
 toPython.fen=move[1].fen;
 toPython.lastMove=move[1].uci;
 toPython.currentPlayer=move[0].game.player;
-toPython.color=move[0].player.color;let oppColor=move[0].opponent.color;
+toPython.color=move[0].player.color;let oppColor=move[0].opponent.color;let pliesV=move[0].game[pliescheck];
 toPython.timePlayer=move[1].clock[toPython.color];
 toPython.timeOpp=move[1].clock[oppColor];
 toPython.possibleMoves=findPossibles(move[0].possibleMoves);
@@ -87,8 +89,9 @@ toPython.possiblePremoves=null;
 toPython.isUnderCheck=null;
 toPython.boardCoord=move[2];
 toPython.threefold=move[0].game.threefold;
+toPython.piecesPosition=Chessboard.fenToObj(toPython.fen);
 console.log(toPython);
-port.postMessage({message: 'move', body: toPython});
+if (!pliesV) port.postMessage({message: 'move', body: toPython});
 }
 
 
