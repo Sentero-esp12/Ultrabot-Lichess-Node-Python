@@ -16,3 +16,4 @@ C:\PythonJScollab\nodejs\chrome\python.javascript.collab.json
 7. Click "Load unpacked".
 8. Navigate there to the folder C:\PythonJScollab\chrome then click `open` from inside the folder.
 9. Create a game on Lichess to test. See output in the console (F12), or the background page console (go to chrome://extensions and click `background` for this extension)
+# 10. Important: right-click any .js file and make node.exe the default program for opening this type of files. And if the python script doesn't work, open the nodejs/example.js file and edit the line with 'python' word to the full path to your python.exe file
