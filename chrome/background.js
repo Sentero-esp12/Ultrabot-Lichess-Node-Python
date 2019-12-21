@@ -19,6 +19,9 @@ else if (request.numberFound) {
 else if (request.board) {
   boardCoordinates=request.board.slice(0);
 }
+else if (request.move) {
+  onMoveReceived(request.move);
+}
 /*else if (request.move) {
   let receivedMove=request.move;
   console.log(receivedMove);
@@ -30,6 +33,29 @@ else if (request.board) {
 
 let checkVersion=true;
 
+const onMoveReceived = (move) => {
+  let receivedMove=move;
+  if (boardCoordinates) {
+  receivedMove.push(boardCoordinates);
+  organizeData(receivedMove);
+} else {
+
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+chrome.tabs.sendMessage(tabs[0].id, {need: "board"}, function(response) {
+  if (response.board)
+  {
+    boardCoordinates=response.board
+    receivedMove.push(boardCoordinates);
+    organizeData(receivedMove);
+  }
+});
+});
+
+
+}
+}
+
+
   chrome.runtime.onMessageExternal.addListener(
     function(request, sender, sendResponse) {
       //if (sender.id == blocklistedExtension)
@@ -39,27 +65,7 @@ let checkVersion=true;
       //  sendResponse({targetData: targetData});
       //else
        if (request.move) {
-         let receivedMove=request.move;
-         if (boardCoordinates) {
-         receivedMove.push(boardCoordinates);
-         organizeData(receivedMove);
-       } else {
-
-         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-       chrome.tabs.sendMessage(tabs[0].id, {need: "board"}, function(response) {
-         if (response.board)
-         {
-           boardCoordinates=response.board
-           receivedMove.push(boardCoordinates);
-           organizeData(receivedMove);
-         }
-       });
-     });
-
-
-       }
-         //console.log(receivedMove);
-         //port.postMessage({message: 'move', body: receivedMove});
+onMoveReceived(request.move);
       } else if (request.success)
       {
         console.log("success");
@@ -85,12 +91,12 @@ const messageToContent = (info,data) => {
 
 const organizeData = (move) => {
 let toPython={};
-toPython.fen=move[1].fen||null;
-toPython.lastMove=move[1].uci||null;
+move[1]&&(toPython.fen=move[1].fen||null);
+move[1]&&(toPython.lastMove=move[1].uci||null);
 toPython.currentPlayer=move[0].game.player||null;
 toPython.color=move[0].player.color||null;let oppColor=move[0].opponent.color||null;let pliesV=move[0].game[pliescheck]||null;
-toPython.timePlayer=move[1].clock[toPython.color]*1000||null;
-toPython.timeOpp=move[1].clock[oppColor]*1000||null;
+move[1]&&(toPython.timePlayer=move[1].clock[toPython.color]*1000||null);
+move[1]&&(toPython.timeOpp=move[1].clock[oppColor]*1000||null);
 toPython.possibleMoves=findPossibles(move[0].possibleMoves)||null;
 toPython.possiblePremoves=null||null;
 toPython.isUnderCheck=null||null;

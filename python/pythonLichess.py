@@ -33,7 +33,7 @@ def iterateAndChoose(PosMoves):
   toSend = json.dumps(toSendDict)
   print(toSend)
   #print(chosenP,chosenD)
-  logWrite(toSend)
+  #logWrite(toSend)
   #print(chosenP,chosenD)
 
 def moveProcess(line):

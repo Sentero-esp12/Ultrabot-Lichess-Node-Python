@@ -103,9 +103,5 @@ const writeToFile = (newString) =>
     setTimeout(()=>{
     sendMessage({message: 'finished', body: "finished writing"});
   },250)
-    /*  if(err) {
-          return console.log(err);
-      }*/
-    //console.log("The file was saved!");
-  });
+});
 }

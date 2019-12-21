@@ -116,7 +116,7 @@ const playMove = (where,time) => {
  to[0] = (to[0]-1)*w+x+w/2;          to[1] = (8-to[1])*w+y+w/2;
   setTimeout(()=>{
   applyData(from,to);
-  drawRect([from[0]-w/4-x,from[1]-w/4-y],[to[0]-w/4-x,to[1]-w/4-y],w/2);
+  //drawRect([from[0]-w/4-x,from[1]-w/4-y],[to[0]-w/4-x,to[1]-w/4-y],w/2);
 },wait)
 }
 
@@ -225,6 +225,19 @@ console.log(where[0])
       }
       return result
   }
+const parseMoves = (moves) => {
+  let splitted = moves.split(' ');
+  let movesObject = {};
+  for (let i=0;i<splitted.length;i++)
+  {
+    let divided = splitted[i].match(/.{1,2}/g);
+    let piece = divided[0];
+    let dests = divided.slice(1);
+    movesObject[piece]=dests.join('');
+  }
+  return movesObject;
+}
+
 
 const readDataString = () => {
   try {
@@ -235,6 +248,8 @@ const readDataString = () => {
           let data = gameData = JSON.parse(script);
           console.log(data);
           defineParameters(data);
+          data.possibleMoves=parseMoves(data.possibleMoves);
+          chrome.runtime.sendMessage({move: [data,null]})
       } catch(e) {
           console.log(e,'The game data isn\'t available.');
       }
