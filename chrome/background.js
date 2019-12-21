@@ -85,18 +85,18 @@ const messageToContent = (info,data) => {
 
 const organizeData = (move) => {
 let toPython={};
-toPython.fen=move[1].fen;
-toPython.lastMove=move[1].uci;
-toPython.currentPlayer=move[0].game.player;
-toPython.color=move[0].player.color;let oppColor=move[0].opponent.color;let pliesV=move[0].game[pliescheck];
-toPython.timePlayer=move[1].clock[toPython.color];
-toPython.timeOpp=move[1].clock[oppColor];
-toPython.possibleMoves=findPossibles(move[0].possibleMoves);
-toPython.possiblePremoves=null;
-toPython.isUnderCheck=null;
-toPython.boardCoord=move[2];
-toPython.threefold=move[0].game.threefold;
-toPython.piecesPosition=Chessboard.fenToObj(toPython.fen);
+toPython.fen=move[1].fen||null;
+toPython.lastMove=move[1].uci||null;
+toPython.currentPlayer=move[0].game.player||null;
+toPython.color=move[0].player.color||null;let oppColor=move[0].opponent.color||null;let pliesV=move[0].game[pliescheck]||null;
+toPython.timePlayer=move[1].clock[toPython.color]*1000||null;
+toPython.timeOpp=move[1].clock[oppColor]*1000||null;
+toPython.possibleMoves=findPossibles(move[0].possibleMoves)||null;
+toPython.possiblePremoves=null||null;
+toPython.isUnderCheck=null||null;
+toPython.boardCoord=move[2]||null;
+toPython.threefold=move[0].game.threefold||null;
+toPython.piecesPosition=Chessboard.fenToObj(toPython.fen)||null;
 console.log(toPython);
 if (!pliesV) {port.postMessage({message: 'move', body: toPython});
 messageToContent('toPython',toPython);
@@ -166,7 +166,7 @@ function handleMessage (req) {
   if (req.message === 'python')
   {
     console.log(req.body);
-    messageToContent('fromPython',req.body);
+    messageToContent('fromPython',req.body.fromPy||req.body);
   }
   else
   if (req.message === 'isActive')

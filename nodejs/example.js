@@ -27,6 +27,7 @@ py.stdout.on('data', function(data){
   }
   let ind=toSend.indexOf('{');
 if (ind!==-1) {toSend=toSend.slice(ind)}
+toSend = toSend.replace(/\r?\n|\r/g, '');
   sendMessage({message: 'python', body: {fromPy: toSend}});
 });
 py.stdout.on('end', function(){
